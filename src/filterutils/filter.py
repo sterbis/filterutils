@@ -40,19 +40,3 @@ class Filter(ABC):
         column_map: dict[str, str] | None = None,
         name_generator: UniqueNameGenerator | None = None,
     ) -> tuple[str, dict[str, Any]]: ...
-
-
-class NullFilter(Filter):
-    def match(
-        self,
-        item: TItem,
-        value_getter: ValueGetter[TItem] | None = None,
-    ) -> bool:
-        return True
-
-    def to_sql(
-        self,
-        column_map: dict[str, str] | None = None,
-        name_generator: UniqueNameGenerator | None = None,
-    ) -> tuple[str, dict[str, Any]]:
-        return "", {}

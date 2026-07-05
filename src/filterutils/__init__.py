@@ -5,7 +5,7 @@ from .exceptions import (
     FilterExpressionError,
     FilterExpressionParsingError,
 )
-from .filter import Filter, NullFilter
+from .filter import Filter
 from .filter_expression_parser import FilterExpressionParser
 from .filter_node import FilterNode
 from .filter_node_validation import validate_filter_node
@@ -27,7 +27,6 @@ __all__ = [
     "validate_filter_node",
     "FilterTree",
     "LogicalOperator",
-    "NullFilter",
     "Operator",
     "UniqueNameGenerator",
 ]

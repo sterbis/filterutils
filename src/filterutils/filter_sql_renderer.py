@@ -76,7 +76,7 @@ class FilterSqlRenderer:
     ) -> tuple[str, dict[str, Any]]:
         logical_operator = filter_tree.logical_operator
         parentheses = filter_tree.parentheses
-        name_generator = name_generator or UniqueNameGenerator(modify_first=True)
+        name_generator = name_generator or UniqueNameGenerator(count_first=True)
 
         sql_parts: list[str] = []
         parameters: dict[str, Any] = {}
@@ -91,7 +91,7 @@ class FilterSqlRenderer:
             parameters.update(child_parameters)
 
         if not sql_parts:
-            return "", {}
+            return "1 = 1", {}
 
         sql = f" {logical_operator.to_sql()} ".join(sql_parts)
         if parentheses and len(sql_parts) > 1:
@@ -116,7 +116,7 @@ class FilterSqlRenderer:
         name_generator: UniqueNameGenerator | None,
         operator: Operator,
     ) -> tuple[str, dict[str, Any]]:
-        name_generator = name_generator or UniqueNameGenerator(modify_first=True)
+        name_generator = name_generator or UniqueNameGenerator(count_first=True)
         parameters: dict[str, Any] = {}
         placeholders = []
 
@@ -157,7 +157,7 @@ class FilterSqlRenderer:
         value: Any,
         name_generator: UniqueNameGenerator | None,
     ) -> tuple[str, dict[str, Any]]:
-        name_generator = name_generator or UniqueNameGenerator(modify_first=True)
+        name_generator = name_generator or UniqueNameGenerator(count_first=True)
         parameters: dict[str, Any] = {}
         sql_parts = []
         for item in value:
